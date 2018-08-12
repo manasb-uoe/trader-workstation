@@ -1,0 +1,8 @@
+.suggestion {
+  padding: 5px 12px !important;
+  margin: 0 !important;
+}
+
+.suggestion:hover {
+  background-color: #eee;
+}

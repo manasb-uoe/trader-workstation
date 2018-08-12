@@ -1,21 +1,30 @@
-import Button from '@material-ui/core/Button';
-import * as React from 'react';
-import './App.css';
+import * as React from "react";
+import "./App.css";
+import { StockAutocomplete } from "./components/Autocomplete";
+import { StockStore } from "./stores/StockStore";
 
-import logo from './logo.svg';
+interface IAppProps {
+  stockStore: StockStore;
+}
 
-class App extends React.Component {
+class App extends React.Component<IAppProps, {}> {
   public render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <Button variant='contained' color="primary">Content</Button>
+      <div>
+        <div>
+          <nav className="navbar navbar-dark bg-dark">
+            <a className="navbar-brand" href="#">
+              Trader Workstation
+            </a>
+          </nav>
+        </div>
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              <StockAutocomplete className="mt-4" stockStore={this.props.stockStore} />
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

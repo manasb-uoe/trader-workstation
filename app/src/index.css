@@ -2,4 +2,21 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background-color: #fafafa;
+}
+
+.mt-5 {
+  margin-top: 5px;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+.text-primary {
+  color: #2196f3;
+}
+
+.selectable {
+  cursor: pointer;
 }

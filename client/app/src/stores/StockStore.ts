@@ -15,7 +15,7 @@ export class StockStore {
 
   constructor(public stockSeachApi: IStockSearchApi) {
     const debouncedSearchStocks = lodash
-      .debounce(this.searchStocks, 500)
+      .debounce(this.searchStocks, 300)
       .bind(this);
 
     reaction(() => this.searchTerm, searchTerm => debouncedSearchStocks());
@@ -23,7 +23,7 @@ export class StockStore {
 
   @action
   selectStock(stock: Stock) {
-    this.searchTerm = stock.name;
+    this.searchTerm = stock.symbol;
     this.selectedStock = stock;
     this.suggestedStocks.length = 0;
   }
@@ -34,7 +34,7 @@ export class StockStore {
   }
 
   private searchStocks() {
-    if (this.searchTerm.length === 0 || (this.selectedStock && this.searchTerm === this.selectedStock.name)) {
+    if (this.searchTerm.length === 0 || (this.selectedStock && this.searchTerm === this.selectedStock.symbol)) {
       return;
     }
 

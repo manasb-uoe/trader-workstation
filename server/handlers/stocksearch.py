@@ -1,16 +1,18 @@
-from utils import httpresponsefactory
-import tornado
+import tornado.httpclient
 import requests
 from utils import logger
+from handlers import basehandler
 
-class StockSearch(tornado.web.RequestHandler):
+class StockSearch(basehandler.BaseHandler):
     log = logger.get_logger(__name__)
-    def get(self):
+    
+    async def get(self):
         try:
+            http = tornado.httpclient.AsyncHTTPClient()
             query = self.get_query_argument("query")
             url = f"http://d.yimg.com/aq/autoc?query={query}&type=S&lang=en-US"
-            response = requests.get(url, timeout=0.2)
-            self.write(httpresponsefactory.create_ok(response.text))
+            response = await http.fetch(url)
+            self.ok(response.body)
         except Exception as e:
-            self.log.error(e)   
-            self.write(httpresponsefactory.create_error(str(e)))
+            self.log.error(e)
+            self.error(e)
